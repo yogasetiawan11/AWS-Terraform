@@ -1,3 +1,32 @@
+# How Terraform Updates Infrastructure
+- Goal: Keep actual state same as desired state
+- State File: Actual state resides in terraform.tfstate file
+- Process: Terraform compares current state with desired configuration
+- Updates: Only changes the resources that need modification
+
+# Terraform State File
+The state file is a JSON file that contains:
+
+- Resource metadata and current configuration
+- Resource dependencies
+- Provider information
+- Resource attribute values
+- State File Best Practices
+- Never edit state file manually
+- Store state file remotely (not in local file system)
+- Enable state locking to prevent concurrent modifications
+Backup state files regularly
+- Use separate state files for different environments
+- Restrict access to state files (contains sensitive data)
+- Encrypt state files at rest and in transit
+
+
+# AWS Remote Backend Components
+- S3 Bucket: Stores the state file
+- S3 Native State Locking: Uses S3 conditional writes for locking (introduced in Terraform 1.10)
+- IAM Policies: Control access to backend resources
+
+
 # What is S3 Native State Locking?
 Starting with Terraform 1.10 (released in 2024), you no longer need DynamoDB for state locking. Terraform now supports S3 native state locking using Amazon S3's Conditional Writes feature.
 
